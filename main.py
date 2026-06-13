@@ -1,17 +1,23 @@
-from google import genai
+from fastapi import FastAPI,HTTPException
+from chat import chatting
 
-config = genai.Client(api_key='AIzaSyCR6Q7XY_HLq57xFBO2RlCSEVrbSuSIKVY')
+app=FastAPI()
 
-context=""
-while True:
-    question = input("Enter your question: ")
-    context+=question
+@app.get('/')
+def homepage():
+    return {'message':'Welcome to my AI Gemini Chatbot'}
 
-    if question == 'Exit' or question=='exit'  :
-        break
 
-    response=config.models.generate_content(
-        model='gemini-3.5-flash',
-        contents=context
-    )
-    print(response.text)
+@app.post('/api_key')
+def chat_with_gemini(question:str)->str:
+    # if api_key != 'AIzaSyCR6Q7XY_HLq57xFBO2RlCSEVrbSuSIKVY':
+    #     raise HTTPException(
+    #         status_code=200,
+    #         detail='Invalid api_key'
+    #     )
+
+    answer = chatting(question)
+    print(answer)
+    return (answer)
+
+
