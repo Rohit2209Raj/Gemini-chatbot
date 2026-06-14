@@ -1,6 +1,9 @@
 import streamlit as st
 import requests
 
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
 st.set_page_config(
     page_title="Gemini Chat",
     page_icon="🤖"
@@ -16,9 +19,15 @@ question=st.text_area("Enter your thoughts ",height=100)
 if st.button("Answer"):
     with st.spinner("Giving you the suitable answer"):
         response=requests.post(
-            url='http://127.0.0.1:8000/chat',
-            params={'question':question}
+                url='http://127.0.0.1:8000/chat',
+                params={'question':question}
         )
-        st.success(response)
 
+        st.session_state.messages.append(
+            response.json()
+        )
+
+
+        for msg in st.session_state.messages:
+            st.success(msg)
 
