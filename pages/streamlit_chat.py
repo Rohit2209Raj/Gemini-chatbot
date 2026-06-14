@@ -1,13 +1,14 @@
 import streamlit as st
 import requests
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
 
 st.set_page_config(
     page_title="Gemini Chat",
     page_icon="🤖"
 )
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
 st.markdown(
     "<h1 style='text-align:center';> Gemini Chat </h1>",
