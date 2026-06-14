@@ -1,6 +1,5 @@
 import streamlit as st
-from chat import chatting
-
+import requests
 
 st.set_page_config(
     page_title="Gemini Chat",
@@ -16,7 +15,10 @@ question=st.text_area("Enter your thoughts ",height=100)
 
 if st.button("Answer"):
     with st.spinner("Giving you the suitable answer"):
-        response = chatting(question)
-        st.text(response)
+        response=requests.post(
+            url='http://127.0.0.1:8000/chat',
+            params={'question':question}
+        )
+        st.success(response)
 
 

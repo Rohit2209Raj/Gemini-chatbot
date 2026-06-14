@@ -15,15 +15,11 @@ logged_in=False
 def homepage():
     return {'message':'Welcome to my AI Gemini Chatbot'}
 
-@app.post('http://127.0.0.1:8000/login')
+@app.post('/login')
 def check_client(api_key:str):
     global logged_in
     if check_api_key(api_key) == True:
         logged_in=True
-        # RedirectResponse(
-        #     url="/chat",
-        #     status_code=200
-        # )
         return {'message':'Login successful'}
     else:
         raise HTTPException(
@@ -31,17 +27,9 @@ def check_client(api_key:str):
             detail='Invalid API_KEY'
         )
         
-
-
 @app.post('/chat')
 def chat_with_gemini(question:str)->str:
-    if not logged_in:
-        raise HTTPException(
-            status_code=403,
-            detail="Login required"
-        )
-    else:
-        answer = chatting(question)
-        return (answer)
+    answer = chatting(question)
+    return answer
 
 

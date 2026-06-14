@@ -21,11 +21,11 @@ if st.button("Login"):
             st.error("Enter the user_api_key")
         else:
             response = requests.post(
-                url="/login",
+                url="http://127.0.0.1:8000/login",
                 params={'api_key':user_api_key}
             )
 
-            if response.status_code == 200:
+            if response.status_code != 401:
                 st.success("Redirecting to Gemini Chat")
                 st.switch_page("pages/streamlit_chat.py")
             else:
