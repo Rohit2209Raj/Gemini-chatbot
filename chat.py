@@ -11,4 +11,4 @@ def chatting(default_question:str)->str:
         model='gemini-2.5-flash',
         contents=default_question
         )
-    return response.text
+    return response

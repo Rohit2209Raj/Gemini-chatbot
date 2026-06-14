@@ -7,8 +7,6 @@ st.set_page_config(
     page_icon="🤖"
 )
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
 
 st.markdown(
     "<h1 style='text-align:center';> Gemini Chat </h1>",
@@ -24,11 +22,5 @@ if st.button("Answer"):
                 params={'question':question}
         )
 
-        st.session_state.messages.append(
-            response.json()
-        )
-
-
-        for msg in st.session_state.messages:
-            st.success(msg)
+        st.success(response.json())
 
