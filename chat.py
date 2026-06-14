@@ -8,7 +8,7 @@ print(os.getenv("API_KEY"))
 
 def chatting(default_question:str)->str:
     response=config.models.generate_content(
-        model='gemini-2.5-flash',
+        model = "gemini-2.0-flash"  ,
         contents=default_question
         )
-    return response
+    return response.text
