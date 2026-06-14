@@ -1,5 +1,6 @@
 import streamlit as st
-from verify import check_api_key
+import requests
+# from verify import check_api_key
 
 
 st.set_page_config(
@@ -19,9 +20,17 @@ if st.button("Login"):
         if not user_api_key:
             st.error("Enter the user_api_key")
         else:
-            if check_api_key(user_api_key):
+            response = requests.post(
+                url="/login",
+                params={'api_key':user_api_key}
+            )
+
+            if response.status_code == 200:
                 st.success("Redirecting to Gemini Chat")
                 st.switch_page("pages/streamlit_chat.py")
             else:
                 st.error("invalid user_api_key")
+
+
+
 

@@ -16,17 +16,7 @@ question=st.text_area("Enter your thoughts ",height=100)
 
 if st.button("Answer"):
     with st.spinner("Giving you the suitable answer"):
-        # if not user_api_key:
-        #     st.error("Enter the user_api_key")
-        # else:
-        #     if check_api_key(user_api_key):
-        #         st.success("Redirecting to Gemini Chat")
-        #         st.switch_page("pages/login.py")
-        #     else:
-        #         st.error("invalid user_api_key")
-
         response = chatting(question)
-
         st.text(response)
 
 
