@@ -22,6 +22,6 @@ if st.button("Answer"):
                 params={'question':question}
         )
 
-        st.success(response.status_code)
-        st.success(response.text)  # See what actually came back
+        # st.success(response.status_code)
+        st.success(response.json())  # See what actually came back
 
