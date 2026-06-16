@@ -7,7 +7,7 @@ colorTo: green
 sdk: streamlit
 app_file: app.py
 pinned: false
--------------
+---
 
 # 🤖 Gemini Chatbot
 
@@ -20,8 +20,6 @@ A full-stack AI chatbot application built using **Streamlit + FastAPI + Google G
 Example:
 
 https://huggingface.co/spaces/YudiCadini/Gemini-Chatbot
-
----
 
 # ✨ Features
 
