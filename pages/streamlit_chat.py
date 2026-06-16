@@ -13,9 +13,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-context=""
 if "messages" not in st.session_state:
     st.session_state.messages=[]
+if "context" not in st.session_state:
+    st.session_state.context=""
 
 for message in st.session_state.messages:
     with st.chat_message(message['role']):
@@ -23,20 +24,23 @@ for message in st.session_state.messages:
 
 if prompt := st.chat_input("Enter your thoughts"):
 
+    st.session_state.context += f"\nUser: {prompt}"
     st.session_state.messages.append({'role':'user','content':prompt})
     with st.chat_message('user'):
-        context+=prompt
-        st.markdown(context)
+        st.markdown(prompt)
+    
     
     response=requests.post(
         url='http://127.0.0.1:8000/chat',
-        params={'question':context}
+        params={'question':st.session_state.context}
     )
 
     reply=response.json()
 
-    st.session_state.messages.append({'role':'assistant','content':reply})
-    with st.chat_message('assistant'):
+    st.session_state.context += f"\nAssistant: {reply}"
+
+    st.session_state.messages.append({'role':'Assistant','content':reply})
+    with st.chat_message('Assistant'):
         st.markdown(reply)
 
     
